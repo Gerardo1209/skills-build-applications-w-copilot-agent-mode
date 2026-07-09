@@ -4,12 +4,16 @@ import { getApiBaseUrl } from '../utils/api';
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [error, setError] = useState('');
+  const codespaceName = import.meta.env.VITE_CODESPACE_NAME;
+  const apiBaseUrl = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev`
+    : 'http://localhost:8000';
   const endpoint = '/api/workouts/';
 
   useEffect(() => {
     async function fetchWorkouts() {
       try {
-        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
+        const response = await fetch(`${apiBaseUrl}${endpoint}`);
         const data = await response.json();
         setWorkouts(Array.isArray(data) ? data : data.results || []);
       } catch (err) {
