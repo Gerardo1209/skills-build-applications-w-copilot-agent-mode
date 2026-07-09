@@ -4,11 +4,12 @@ import { getApiBaseUrl } from '../utils/api';
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const endpoint = '/api/users/';
 
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/users/`);
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
         const data = await response.json();
         setUsers(Array.isArray(data) ? data : data.results || []);
       } catch (err) {

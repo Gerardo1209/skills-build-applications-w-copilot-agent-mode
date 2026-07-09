@@ -4,11 +4,12 @@ import { getApiBaseUrl } from '../utils/api';
 function Teams() {
   const [teams, setTeams] = useState([]);
   const [error, setError] = useState('');
+  const endpoint = '/api/teams/';
 
   useEffect(() => {
     async function fetchTeams() {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/teams/`);
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
         const data = await response.json();
         setTeams(Array.isArray(data) ? data : data.results || []);
       } catch (err) {

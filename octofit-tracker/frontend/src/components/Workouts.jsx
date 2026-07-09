@@ -4,11 +4,12 @@ import { getApiBaseUrl } from '../utils/api';
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
   const [error, setError] = useState('');
+  const endpoint = '/api/workouts/';
 
   useEffect(() => {
     async function fetchWorkouts() {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/workouts/`);
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
         const data = await response.json();
         setWorkouts(Array.isArray(data) ? data : data.results || []);
       } catch (err) {

@@ -4,11 +4,12 @@ import { getApiBaseUrl } from '../utils/api';
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState('');
+  const endpoint = '/api/leaderboard/';
 
   useEffect(() => {
     async function fetchLeaderboard() {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/leaderboard/`);
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
         const data = await response.json();
         setEntries(Array.isArray(data) ? data : data.results || []);
       } catch (err) {
